@@ -1,5 +1,6 @@
 package com.hack.olahack;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -34,7 +35,7 @@ public class MainActivity extends ActionBarActivity implements
 				.replace(R.id.container, new CommonFragment("lodging"))
 				.commit();
 		drawerLayout.openDrawer(Gravity.LEFT);
-		// startService(new Intent(this, MyService.class));
+		startService(new Intent(this, AutoBookService.class));
 	}
 
 	@Override

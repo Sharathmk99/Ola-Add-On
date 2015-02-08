@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.hack.datainterfaces.PlaceDetails;
 import com.hack.olahack.R;
-import com.hackaton.olaadon.images.ImageDownloader;
 import com.hackaton.olaadon.images.MakeUrlForPhotoReference;
 import com.hackaton.olaadon.utils.Utils;
 import com.squareup.picasso.Picasso;
@@ -85,9 +84,6 @@ public class HotelAdapter extends BaseAdapter {
 					.load(new MakeUrlForPhotoReference(Utils.API_KEY, details
 							.get(position).getPhotoReference()).getUrl())
 					.error(R.drawable.not_available).into(holder.imageView);
-			// new ImageDownloader(holder.imageView, context)
-			// .execute(new MakeUrlForPhotoReference(Utils.API_KEY,
-			// details.get(position).getPhotoReference()).getUrl());
 		}
 
 		return recycledView;
