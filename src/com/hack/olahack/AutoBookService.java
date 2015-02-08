@@ -25,7 +25,7 @@ import android.util.Log;
 public class AutoBookService extends Service {
 
 	String apiKey;
-
+	static boolean isshowed = true;
 	public static Double dstLatitude = 12.9250;
 	public static Double dstLongitude = 77.5950;
 
@@ -50,7 +50,7 @@ public class AutoBookService extends Service {
 
 	public static String startTime = "08/02/2014";
 
-	//GPSTracker gpsTracker;
+	// GPSTracker gpsTracker;
 
 	static long nextTimeInMillis;
 
@@ -122,14 +122,18 @@ public class AutoBookService extends Service {
 					Log.e("Popup", "" + "pop");
 
 					etaTime11 = Double.toString(hrsEta);
+					if (isshowed) {
+						Intent intent = new Intent(context, AutoPopUp.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-					Intent intent = new Intent(context, AutoPopUp.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						context.startActivity(intent);
+						isshowed = false;
+					}
 
-					context.startActivity(intent);
-					context.stopService(new Intent(context,
-							AutoBookService.class));
-
+					// context.stopService(new Intent(context,
+					// AutoBookService.class));
+					//
+					// AutoBookService.this.stopSelf();
 					// //////////////////////////////////////
 					// //////////////// display popup here
 
@@ -246,7 +250,6 @@ public class AutoBookService extends Service {
 
 		SharedPreferences preferences = (SharedPreferences) getSharedPreferences(
 				"lastupdate", Context.MODE_PRIVATE);
-
 		preferences.edit()
 				.putLong("last", Calendar.getInstance().getTimeInMillis())
 				.commit();
@@ -267,7 +270,7 @@ public class AutoBookService extends Service {
 
 		context = this;
 
-		//gpsTracker = new GPSTracker(this);
+		// gpsTracker = new GPSTracker(this);
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -283,9 +286,9 @@ public class AutoBookService extends Service {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 
-//		if (gpsTracker != null) {
-//			gpsTracker.stopUsingGPS();
-//		}
+		// if (gpsTracker != null) {
+		// gpsTracker.stopUsingGPS();
+		// }
 		super.onDestroy();
 	}
 
